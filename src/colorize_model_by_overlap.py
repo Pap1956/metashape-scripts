@@ -47,7 +47,8 @@ def colorize_model_vertices_by_overlap():
         for camera in cameras:
             if camera.transform.inv().mulp(coord)[2] < 0:
                 continue
-
+            if not camera.project(coord):
+                continue
             if 0 < camera.project(coord)[0] < camera.sensor.width:
                 if 0 < camera.project(coord)[1] < camera.sensor.height:
                     overlap += 1
